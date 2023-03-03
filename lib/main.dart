@@ -20,6 +20,13 @@ class _HomePageState extends State<HomePage> {
 
   bool _isLoading = true;
 
+
+  // Colors
+  final addButtonColor = const Color.fromARGB(255, 57, 91, 100);
+  final appBarColor = const Color.fromARGB(255, 44, 51, 51);
+  final cardColor = const Color.fromARGB(255, 164, 201, 202);
+  final appBgColor = const Color.fromARGB(255, 231, 246, 242);
+
   void _refreshJournals() async {
     final data = await SQLHelper.getItems();
 
@@ -89,7 +96,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         elevation: 5,
         isScrollControlled: true,
-        backgroundColor: const Color.fromARGB(255, 229, 229, 203),
+        backgroundColor: appBgColor,
         builder: (_) => Container(
               padding: EdgeInsets.only(
                 top: 15,
@@ -136,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 60, 42, 33)
+                        backgroundColor: addButtonColor
                       ),
                       onPressed: () async {
                         if(id == null) {
@@ -166,12 +173,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 229, 229, 203),
-      appBar: AppBar(title: Text('Contacts', style: TextStyle(fontFamily: GoogleFonts.lato().fontFamily, fontSize: 26)), backgroundColor: const Color.fromARGB(255, 26, 18, 11)),
+      backgroundColor: appBgColor,
+      appBar: AppBar(title: Text('Contacts', style: TextStyle(fontFamily: GoogleFonts.lato().fontFamily, fontSize: 26)), backgroundColor: appBarColor),
       body: ListView.builder(
         itemCount: _journals.length,
           itemBuilder: (context, index) => Card(
-            color: const Color.fromARGB(200, 213, 206, 163),
+            color: cardColor,
             margin: const EdgeInsets.all(15),
             child: ListTile(
               title: Text("Name: " + _journals[index]['name'], style: TextStyle(color: Colors.black, fontFamily: GoogleFonts.merriweather().fontFamily)),
@@ -208,8 +215,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: Builder(builder: (context) {
         return FloatingActionButton(
-          // rgb(60, 42, 33)
-          backgroundColor: const Color.fromARGB(255, 60, 42, 33),
+          backgroundColor: addButtonColor,
           child: const Icon(Icons.add),
           onPressed: () => _showForm(null),
         );
